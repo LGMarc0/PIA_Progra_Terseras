@@ -20,10 +20,33 @@ class Empleado:
 empleados = []
 
 def pedir_fecha(prompt):
+    while True:
+        texto = input(prompt).strip()
+        try:
+            return datetime.datetime.strptime(texto, "%d/%m/%Y").date()
+        except ValueError:
+            print("Formato inválido. Use DD/MM/AAAA.")
     
 
 def agregar_empleado():
-    
+    print("\n--- AGREGAR EMPLEADO ---")
+    try:
+        id_emp = int(input("ID del empleado: "))
+        for emp in empleados:
+            if emp.id_Empleado == id_emp:
+                print("Error: Ya existe un empleado con ese ID.")
+                return
+        nombre = input("Nombre del empleado: ")
+        departamento = input("Departamento: ")
+        puesto = input("Puesto: ")
+        horas = float(input("Horas laborales(A la semana): "))
+        fecha = pedir_fecha("Fecha de ingreso (DD/MM/AAAA): ")
+        salario = float(input("Salario(Mensual): "))
+        bono = float(input("Bono(Semanal): "))
+        empleados.append(Empleado(id_emp, nombre, departamento, puesto, horas, fecha, salario, bono))
+        print("Empleado agregado exitosamente.")
+    except ValueError:
+        print("Error: Por favor ingrese valores válidos.")
 
 def ver_empleado():
     
@@ -39,14 +62,14 @@ def modificar_empleado():
 
 
 while True:
-   print("\n--- MENÚ ---")
-   print("Elige una opcion")
-   print("1. Agregar Un Empleado")
-   print("2.- Ver info. de un Empleado")
-   print("3.- Ver Todos los Empleados")
-   print("4.- Eliminar Empleado") 
-   print("5.- Modificar info. de un Empleado")
-   print("6.- Salir")
+    print("\n--- MENÚ ---")
+    print("Elige una opcion")
+    print("1. Agregar Un Empleado")
+    print("2.- Ver info. de un Empleado")
+    print("3.- Ver Todos los Empleados")
+    print("4.- Eliminar Empleado") 
+    print("5.- Modificar info. de un Empleado")
+    print("6.- Salir")
    try:
         opcion = int(input("¿Qué opción desea elegir? "))
         if opcion == 1:
