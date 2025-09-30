@@ -1,5 +1,7 @@
 class Empleado:
-    def __init__(self, departamento, puesto, horas_lab, fechas_ingreso, salario, bono):
+    def __init__(self, id_Empleado, Nom_Empleado, departamento, puesto, horas_lab, fechas_ingreso, salario, bono):
+        self.id_Empleado = id_Empleado
+        self.Nom_Empleado = Nom_Empleado
         self.departamento = departamento
         self.puesto = puesto
         self.horas_lab = horas_lab
