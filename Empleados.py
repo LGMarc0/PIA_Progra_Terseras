@@ -49,28 +49,97 @@ def agregar_empleado():
         print("Error: Por favor ingrese valores válidos.")
 
 def ver_empleado():
-    
+    print("\n--- VER INFORMACIÓN DE EMPLEADO ---")
+    if not empleados:
+        print("No hay empleados registrados.")
+        return
+    try:
+        id_buscar = int(input("Ingrese el ID del empleado a buscar: "))
+        for emp in empleados:
+            if emp.id_Empleado == id_buscar:
+                print("\nInformación del empleado:")
+                print(emp)
+                return
+        print("Empleado no encontrado.")
+    except ValueError:
+        print("Error: Por favor ingrese un ID válido.")
 
 def ver_todos_empleados():
-    
+    print("\n--- TODOS LOS EMPLEADOS ---")
+    if not empleados:
+        print("No hay empleados registrados.")
+        return
+    for i, emp in enumerate(empleados, 1):
+        print(f"{i}. {emp}")
 
 def eliminar_empleado():
-    
+    print("\n--- ELIMINAR EMPLEADO ---")
+    if not empleados:
+        print("No hay empleados registrados.")
+        return
+    try:
+        id_eliminar = int(input("Ingrese el ID del empleado a eliminar: "))
+        for i, emp in enumerate(empleados):
+            if emp.id_Empleado == id_eliminar:
+                empleados.pop(i)
+                print("Empleado eliminado exitosamente.")
+                return
+        print("Empleado no encontrado.")
+    except ValueError:
+        print("Error: Por favor ingrese un ID válido.")
 
 def modificar_empleado():
+    print("\n--- MODIFICAR EMPLEADO ---")
+    if not empleados:
+        print("No hay empleados registrados.")
+        return
+    try:
+        id_mod = int(input("Ingrese el ID del empleado a modificar: "))
+        for emp in empleados:
+            if emp.id_Empleado == id_mod:
+                print(f"Empleado encontrado: {emp.Nom_Empleado}")
+                print("Deje en blanco para mantener el valor actual.")
+                nuevo_nombre = input(f"Nombre ({emp.Nom_Empleado}): ").strip()
+                if nuevo_nombre:
+                    emp.Nom_Empleado = nuevo_nombre
+                nuevo_depto = input(f"Departamento ({emp.departamento}): ").strip()
+                if nuevo_depto:
+                    emp.departamento = nuevo_depto
+                nuevo_puesto = input(f"Puesto ({emp.puesto}): ").strip()
+                if nuevo_puesto:
+                    emp.puesto = nuevo_puesto
+                nuevas_horas = input(f"Horas laborales ({emp.horas_lab}): ").strip()
+                if nuevas_horas:
+                    emp.horas_lab = float(nuevas_horas)
+                fecha_texto = input(f"Fecha de ingreso ({emp.fecha_ingreso.strftime('%d/%m/%Y')}): ").strip()
+                if fecha_texto:
+                    try:
+                        emp.fecha_ingreso = datetime.datetime.strptime(fecha_texto, "%d/%m/%Y").date()
+                    except ValueError:
+                        print("Fecha no modificada: formato inválido.")
+                nuevo_salario = input(f"Salario ({emp.salario}): ").strip()
+                if nuevo_salario:
+                    emp.salario = float(nuevo_salario)
+                nuevo_bono = input(f"Bono ({emp.bono}): ").strip()
+                if nuevo_bono:
+                    emp.bono = float(nuevo_bono)
+                print("Empleado modificado exitosamente.")
+                return
+        print("Empleado no encontrado.")
+    except ValueError:
+        print("Error: Por favor ingrese valores válidos.")
     
 
 
 while True:
     print("\n--- MENÚ ---")
-    print("Elige una opcion")
-    print("1. Agregar Un Empleado")
-    print("2.- Ver info. de un Empleado")
-    print("3.- Ver Todos los Empleados")
-    print("4.- Eliminar Empleado") 
-    print("5.- Modificar info. de un Empleado")
-    print("6.- Salir")
-   try:
+    print("1. Agregar un Empleado")
+    print("2. Ver info. de un Empleado")
+    print("3. Ver Todos los Empleados")
+    print("4. Eliminar Empleado")
+    print("5. Modificar info. de un Empleado")
+    print("6. Salir")
+    try:
         opcion = int(input("¿Qué opción desea elegir? "))
         if opcion == 1:
             agregar_empleado()
@@ -87,5 +156,5 @@ while True:
             break
         else:
             print("Opción no válida. Por favor, elija una opción del 1 al 6.")
-   except ValueError:
-            print("Por favor, ingrese un número válido.")
+    except ValueError:
+        print("Por favor, ingrese un número válido.")
