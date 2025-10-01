@@ -151,3 +151,4 @@ if __name__ == "__main__":
             break
         else:
             print("Opción no válida. Por favor seleccione una opción del 1 al 6.")
+            
